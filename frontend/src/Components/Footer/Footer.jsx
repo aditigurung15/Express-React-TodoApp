@@ -1,0 +1,14 @@
+import React from 'react'
+import './Footer.css'
+
+const Footer = () => {
+  return (
+    <div className='d-flex justify-content-center align-items-center footer'>
+    
+    <h4>todo</h4> &nbsp; <p className='m-0'>&copy; By Aditi Gurung</p>
+    
+    </div>
+  )
+}
+
+export default Footer
