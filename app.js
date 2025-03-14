@@ -34,7 +34,8 @@ if (process.env.NODE_ENV == "production") {
   });
 }
 
+const PORT=process.env.PORT || 1000
 // Start server
-app.listen(1000, () => {
+app.listen(PORT, () => {
   console.log("Server running on port 1000");
 });
