@@ -19,16 +19,12 @@ const Signin = () => {
   const submit = async (e) => {
     e.preventDefault();
 
-    await axios
-      .post(`$(window.location.origin)/api/v1/signin`, inputs)
-      .then((response) => {
+    await axios.post(`/api/v1/signin`, inputs).then((response) => {
+      sessionStorage.setItem("id", response.data.user._id);
 
-        sessionStorage.setItem("id", response.data.user._id);
-
-        dispatch(authActions.login());
-        history("/todo");
-        
-      });
+      dispatch(authActions.login());
+      history("/todo");
+    });
   };
 
   return (

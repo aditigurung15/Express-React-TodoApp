@@ -3,7 +3,6 @@ import "./Todo.css";
 import axios from "axios";
 
 const Todoupdate = ({ display, update }) => {
-
   const [inputs, setInputs] = useState({ title: "", body: "" });
 
   const change = (e) => {
@@ -18,9 +17,9 @@ const Todoupdate = ({ display, update }) => {
 
   const submit = async () => {
     await axios
-      .put(`$(window.location.origin)/api/v2/updateTask/${update._id}`, inputs)
+      .put(`/api/v2/updateTask/${update._id}`, inputs)
       .then((response) => {
-       alert("task updated")
+        alert("task updated");
       });
     // console.log(inputs)
     // display(none);

@@ -6,7 +6,7 @@ import TodoUpdate from "./Todoupdate";
 import axios from "axios";
 
 let id = sessionStorage.getItem("id");
-let toupdateArray= [];
+let toupdateArray = [];
 
 const Todo = () => {
   const [inputs, setInputs] = useState({ title: "", body: "" });
@@ -27,7 +27,7 @@ const Todo = () => {
     } else {
       if (id) {
         await axios
-          .post(`$(window.location.origin)/api/v2/addTask`, {
+          .post(`/api/v2/addTask`, {
             title: inputs.title,
             body: inputs.body,
             id: id,
@@ -49,50 +49,39 @@ const Todo = () => {
   };
 
   const del = async (cardid) => {
-
-    if (id){
-    await axios
-      .delete(`$(window.location.origin)/api/v2/deleteTask/${cardid}`, {
-        data: { id: id },
-      })
-      .then(() => {
-        toast.success("task deleted successfully");
-      });
-    // Array.splice(id, "1");
-    // setArray([...Array]);
-  }else{
-    toast.error("please sign up first")
-  }
-
-}
-
+    if (id) {
+      await axios
+        .delete(`/api/v2/deleteTask/${cardid}`, {
+          data: { id: id },
+        })
+        .then(() => {
+          toast.success("task deleted successfully");
+        });
+      // Array.splice(id, "1");
+      // setArray([...Array]);
+    } else {
+      toast.error("please sign up first");
+    }
+  };
 
   const dis = (value) => {
     document.getElementById("todo-update").style.display = value;
   };
 
-
- const update=(value)=>{
-  toupdateArray = Array[value];
- }
-
+  const update = (value) => {
+    toupdateArray = Array[value];
+  };
 
   useEffect(() => {
-if (id){
-
-  const fetch = async () => {
-    await axios
-      .get(`$(window.location.origin)/api/v2/getTask/${id}`)
-      .then((response) => {
-        setArray(response.data.list);
-      });
-  };
-  fetch();
-}
+    if (id) {
+      const fetch = async () => {
+        await axios.get(`/api/v2/getTask/${id}`).then((response) => {
+          setArray(response.data.list);
+        });
+      };
+      fetch();
+    }
   }, [submit]);
-
-
-
 
   return (
     <>
@@ -150,7 +139,7 @@ if (id){
       </div>
       <div className="todo-update" id="todo-update">
         <div className="container update">
-          <TodoUpdate display={dis} update={toupdateArray}/>
+          <TodoUpdate display={dis} update={toupdateArray} />
         </div>
       </div>
     </>
